@@ -3,11 +3,6 @@ const timestamps = require('mongoose-timestamp');
 
 const InvoiceSchema = new mongoose.Schema(
   {
-    contact: {
-      type: String,
-      lowercase: true,
-      trim: true,
-    },
     company: {
       type: String,
       lowercase: true,
