@@ -1,10 +1,5 @@
 const Invoice = require('../entities/invoice');
 
-/**
- * A simple CRUD controller for invoices
- * Create the necessary controller methods
- */
-
 exports.all = async (req, res) => {
   const { limit, page } = req.query;
   const skip = parseInt(limit) * parseInt(page);
@@ -50,7 +45,7 @@ exports.update = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   try {
-    const invoice = await Invoice.findById(id).updateOne(body);
+    await Invoice.findById(id).updateOne(body);
 
     return res.status(200).json({ success: true, });
   } catch (error) {

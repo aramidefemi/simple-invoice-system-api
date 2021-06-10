@@ -3,11 +3,7 @@ const timestamps = require('mongoose-timestamp');
 
 const InvoiceSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
-    },
-    mobile: {
+    contact: {
       type: String,
       lowercase: true,
       trim: true,
@@ -17,7 +13,12 @@ const InvoiceSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-    designation: {
+    email: {
+      type: String,
+      lowercase: true,
+      trim: true,
+    },
+    phone: {
       type: String,
       lowercase: true,
       trim: true,
@@ -27,25 +28,15 @@ const InvoiceSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-    website: {
-      type: String,
-      lowercase: true,
-      trim: true,
+    amount: {
+      type: Number,
     },
     active: {
       type: Boolean,
       default: true,
-    },
-    social: {
-      youtube: String,
-      twitter: String,
-      facebook: String,
-      linkedin: String,
-      instagram: String,
-    },
+    }
   },
-  { collection: 'contacts' }
 );
 
 InvoiceSchema.plugin(timestamps);
-module.exports = mongoose.model('Contact', InvoiceSchema);
+module.exports = mongoose.model('Invoice', InvoiceSchema);

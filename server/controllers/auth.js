@@ -3,19 +3,14 @@ const jwt = require('jsonwebtoken');
 const { JWT_PRIVATE_KEY } = require('../config');
 const privateKey = JWT_PRIVATE_KEY;
 
-/**
- * Given a json request
- * {"username": "<...>", "password": "<...>"}
- * Verify the user is valid and return some authentication token
- * which can be used to verify protected resources
- * {"user": <{...}>, "token": "<...>""}
- */
 exports.login = async (req, res) => {
-  const { username, password } = req.body;
-  try {
-    if (!username || !password) throw new Error('Invalid Parameters');
-    const user = await User.findOne({ username });
+  const { email, password } = req.body;
 
+  try {
+    if (!email || !password) throw new Error('Invalid Parameters');
+    const user = await User.findOne({ email });
+
+    console.log('user',user)
     if (!user) throw new Error('Account not found!');
 
     const token = jwt.sign({ ...user }, privateKey);
@@ -26,18 +21,12 @@ exports.login = async (req, res) => {
     return res.status(500).json({ err: error.message });
   }
 };
-/**
- * Given a json request
- * {"username": "<...>", "password": "<...>"}
- * Create a new user and return some authentication token
- * which can be used to verify protected resources
- * {"user": <{...}>, "token": "<...>""}
- */
+
 exports.signup = async (req, res) => {
   const { body } = req;
 
   try {
-    if (!body.email || !body.password || !body.username)
+    if (!body.email || !body.password)
       throw new Error('Invalid Parameters');
 
     const existingUser = await User.findOne({ email: body.email });
@@ -54,9 +43,7 @@ exports.signup = async (req, res) => {
     return res.status(500).json({ err: error.message });
   }
 };
-/**
- * Implement a way to recover user accounts
- */
+
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
   try {
