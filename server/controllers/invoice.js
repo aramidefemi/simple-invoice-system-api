@@ -22,7 +22,7 @@ exports.get = async (req, res) => {
       'name username email'
     );
 
-    return res.status(200).json({ invoice });
+    return res.status(200).json(invoice);
   } catch (error) {
     return res.status(500).json({ err: error });
   }
