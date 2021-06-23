@@ -19,4 +19,9 @@ module.exports = (app) => {
   app.route('/invoice').post(validateToken, Invoice.create); 
   app.route('/invoice/:id').put(validateToken, Invoice.update);
   app.route('/invoice/:id').delete(validateToken, Invoice.remove);
+
+
+  app.route('/invoice/payment/stats').get(validateToken, Invoice.getPaymentStats);
+
+  app.route('/invoice/record/payment').post(validateToken, Invoice.recordPayment);
 };

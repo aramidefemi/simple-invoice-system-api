@@ -3,6 +3,10 @@ const timestamps = require('mongoose-timestamp');
 
 const InvoiceSchema = new mongoose.Schema(
   {
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+    },
     company: {
       type: String,
       lowercase: true,
@@ -29,6 +33,10 @@ const InvoiceSchema = new mongoose.Schema(
     active: {
       type: Boolean,
       default: true,
+    },
+    status: {
+      type: String,
+      default: 'pending',
     }
   },
 );
